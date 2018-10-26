@@ -2,7 +2,7 @@ package practicas.p4.trabajo;
 
 import practicas.p4.excepciones.TrabajoFinalizado;
 
-public class Reparacion extends Trabajo{
+public abstract class Reparacion extends Trabajo{
     
     // ATTRIBUTES
     private double precioMaterial;
