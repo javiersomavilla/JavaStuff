@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import practicas.p4.Main;
+import practicas.p4.excepciones.TipoNoCoincide;
+import practicas.p4.excepciones.TrabajoFinalizado;
+import practicas.p4.excepciones.TrabajoNoEncontrado;
 
 public class AumentaCostePiezasTrabajo {
     private static JFrame f=new JFrame("Aumenta Coste Trabajo"); 
@@ -92,17 +95,23 @@ public class AumentaCostePiezasTrabajo {
                                 coste = Double.parseDouble(costeStr);
                                 Main.taller.aumentaCostePiezas(id, coste);
                                 bSalir.doClick();
-                            }catch(Exception e2){
-                                JOptionPane.showMessageDialog(new JFrame(), "Las horas deben ser un n˙mero entero.", "Dialog", JOptionPane.ERROR_MESSAGE);
+                            }catch(NumberFormatException e2){
+                                JOptionPane.showMessageDialog(new JFrame(), "Las horas deben ser un n√∫mero real.", "Dialog", JOptionPane.ERROR_MESSAGE);
+                            }catch(TrabajoFinalizado e3){
+                                JOptionPane.showMessageDialog(new JFrame(), "No se pueden aumentar las horas, el trabajo ya esta finalizado.", "Dialog", JOptionPane.ERROR_MESSAGE);
+                            }catch(TrabajoNoEncontrado e4){
+                                JOptionPane.showMessageDialog(new JFrame(), "El trabajo buscado no ha sido encontrado.", "Dialog", JOptionPane.ERROR_MESSAGE);
+                            }catch(TipoNoCoincide e5){
+                                JOptionPane.showMessageDialog(new JFrame(), "No se puede aumentar el coste, este trabajo no es una reparacion.", "Dialog", JOptionPane.ERROR_MESSAGE);
                             }
                         }else{
                             JOptionPane.showMessageDialog(new JFrame(), "Campo vacio, por favor introduce un importe correcto.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }catch(Exception e1){
-                        JOptionPane.showMessageDialog(new JFrame(), "Introduce in id v·lido.", "Dialog", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(new JFrame(), "Introduce in id v√°lido.", "Dialog", JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(new JFrame(), "Introduce in id v·lido.", "Dialog", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), "Introduce in id v√°lido.", "Dialog", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
