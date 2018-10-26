@@ -37,10 +37,14 @@ public class Taller {
         trabajos.add(t);
     }
     
-    public void aumentaHoras(int id, int horas) throws TrabajoNoEncontrado{
+    public void aumentaHoras(int id, int horas) throws TrabajoNoEncontrado, TrabajoFinalizado{
         Trabajo t = encuentraTrabajo(id);
         if(t != null){
-            t.aumentaHoras(horas);
+            if(!t.isFinalizado()){
+                t.aumentaHoras(horas);
+            }else{
+                throw new TrabajoFinalizado(id);
+            }
         }else{
             throw new TrabajoNoEncontrado(id);
         }
