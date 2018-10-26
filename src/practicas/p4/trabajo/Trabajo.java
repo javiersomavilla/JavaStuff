@@ -4,7 +4,7 @@ import java.util.Date;
 
 import practicas.p4.excepciones.TrabajoFinalizado;
 
-public class Trabajo {
+public abstract class Trabajo {
     
     // ATTRIBUTES
     private static int proximoId = 1;
