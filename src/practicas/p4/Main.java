@@ -71,6 +71,8 @@ public class Main {
             taller.aumentaHoras(10, 10);
         } catch (TrabajoNoEncontrado e) {            
             System.out.println("[ERROR] --> "+e.getMessage());
+        } catch (TrabajoFinalizado e1){
+            System.out.println("[ERROR] --> "+e1.getMessage());
         }
         
         pintaTaller();
