@@ -18,7 +18,7 @@ public class LinkedList <E extends Comparable<E>>{
     public E get(int index){
         Node<E> node = null;
         
-        if(index < size){
+         if(index >= 0 && index < size){
             if(index == 0){
                 node = this.first;
             }else if(index == size - 1){
@@ -72,17 +72,21 @@ public class LinkedList <E extends Comparable<E>>{
     }
     
     public Node<E> addAt(int index, E newValue){
-        Node<E> node = this.first;
-        Node<E> newNode = new Node(newValue);
-        for(int i=0; i<index; i++){
-            node = node.getNext();
+        Node<E> newNode = null;
+        
+        if(index >= 0 && index < size){
+            Node<E> node = this.first;
+            newNode = new Node(newValue);
+            for(int i=0; i<index; i++){
+                node = node.getNext();
+            }
+            
+            newNode.setBefore(node.getBefore());
+            newNode.setNext(node);
+            node.getBefore().setNext(newNode);
+            
+            this.size++;
         }
-        
-        newNode.setBefore(node.getBefore());
-        newNode.setNext(node);
-        node.getBefore().setNext(newNode);
-        
-        this.size++;
         
         return newNode;
     }
@@ -115,15 +119,19 @@ public class LinkedList <E extends Comparable<E>>{
     }
     
     public Node<E> removeAt(int index){
-        Node<E> node = this.first;
+        Node<E> node = null;
         
-        for(int i=0; i<index; i++){
-            node = node.getNext();
+        if(index >= 0 && index < size){
+            node = this.first;
+            
+            for(int i=0; i<index; i++){
+                node = node.getNext();
+            }
+            
+            node.getBefore().setNext(node.getNext());
+            node.getNext().setBefore(node.getBefore());
+            this.size--;
         }
-        
-        node.getBefore().setNext(node.getNext());
-        node.getNext().setBefore(node.getBefore());
-        this.size--;
         
         return node;
     }
